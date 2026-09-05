@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 						<span className="text-2xl font-bold tracking-tight uppercase">Aiwazian</span>
 					</Link>
 					<nav className="flex items-center gap-4 md:gap-8 text-sm font-medium uppercase tracking-widest text-zinc-400">
-						<a href="https://rustore.ru/catalog/app/com.aiwazian.messenger" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Скачать</a>
+						<a href="https://play.google.com/store/apps/details?id=com.aiwazian.messenger" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Скачать</a>
 					</nav>
 				</header>
 

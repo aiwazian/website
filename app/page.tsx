@@ -67,7 +67,7 @@ export default function Home() {
         className="flex flex-col sm:flex-row items-center gap-6"
       >
         <a
-          href="https://rustore.ru/catalog/app/com.aiwazian.messenger"
+          href="https://play.google.com/store/apps/details?id=com.aiwazian.messenger"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-zinc-200 transition-all text-center flex items-center justify-center gap-2"
