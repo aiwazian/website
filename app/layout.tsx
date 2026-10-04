@@ -3,6 +3,7 @@ import { GitHubIcon, TelegramIcon } from '@/components/social-icons';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import Link from 'next/link';
 import './globals.css';
+import Script from 'next/script';
 
 const inter = Inter({
 	subsets: ['latin', 'cyrillic'],
@@ -23,6 +24,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="ru" className={`${inter.variable} ${jetbrainsMono.variable} dark`}>
 			<body className="bg-[#080808] text-[#F0F0F0] font-sans flex flex-col min-h-screen antialiased selection:bg-zinc-700/50 selection:text-white" suppressHydrationWarning>
+				<Script
+					src="https://www.googletagmanager.com/gtag/js?id=G-Q9WNS0MCJZ"
+					strategy="afterInteractive"
+				/>
+				<Script id="google-analytics" strategy="afterInteractive">
+					{`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+
+                        gtag('config', 'G-Q9WNS0MCJZ');
+                    `}
+				</Script>
+
 				<header className="sticky top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 z-50 bg-[#080808]/70 backdrop-blur-md border-b border-white/5">
 					<Link href="/" className="flex items-center gap-3 group">
 						<span className="text-2xl font-bold tracking-tight uppercase">Aiwazian</span>
