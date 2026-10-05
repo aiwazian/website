@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { GitHubIcon, TelegramIcon } from '@/components/social-icons';
+import { GitHubIcon, TelegramIcon, XIcon } from '@/components/social-icons';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import Link from 'next/link';
 import './globals.css';
@@ -62,6 +62,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</div>
 
 					<div className="flex gap-5 justify-self-start md:justify-self-center">
+						<a
+							href="https://x.com/karenaiwazian"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="X"
+							className="text-zinc-500 hover:text-white transition-colors"
+						>
+							<XIcon className="w-5 h-5" />
+						</a>
 						<a
 							href="https://aiwazian.t.me"
 							target="_blank"
