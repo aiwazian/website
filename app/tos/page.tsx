@@ -1,10 +1,105 @@
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Условия использования | Aiwazian Messenger',
-};
+import { useLanguage } from '@/lib/i18n';
 
 export default function TermsOfService() {
+  const { lang } = useLanguage();
+
+  if (lang === 'en') {
+    return (
+      <div className="px-6 md:px-12 py-12 md:py-24 max-w-4xl w-full mx-auto z-10">
+        <div className="mx-auto">
+          <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 uppercase">Terms of Service</h1>
+
+          <p className="mb-12 font-mono text-zinc-500 text-sm">Last updated: May 15, 2026</p>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">1. General Provisions</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>1.1. These Terms of Service (the &ldquo;Terms&rdquo;) govern access to and use of the &ldquo;Aiwazian Messenger&rdquo; application. The Operator is natural person Karen Shavarshevich Aiwazian, e-mail: support@aiwazian.ru.</p>
+              <p>1.2. By using the Application, the User acknowledges having read and accepted these Terms and the Privacy Policy in full. If you disagree, you must cease using the Application immediately.</p>
+              <p>1.3. Applicable laws govern the relationship between the parties.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">2. Service Description</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>2.1. The Application provides instant text messaging, file sharing, voice messages, personal chats, groups, channels, and associated communication services.</p>
+              <p>2.2. The Operator may modify, restrict, or discontinue any feature at any time without prior notice or compensation.</p>
+              <p>2.3. The Application is provided &ldquo;AS IS&rdquo; and &ldquo;AS AVAILABLE&rdquo; without warranties of any kind.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">3. Registration &amp; Account</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>3.1. Registration is required to access app functionality. The User agrees to provide accurate details.</p>
+              <p>3.2. The User is solely responsible for account credentials and all actions taken under their account.</p>
+              <p>3.3. The Operator is not liable for unauthorized access resulting from circumstances outside the Operator&apos;s reasonable control.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">4. Acceptable Use Policy</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>4.1. Users must not violate laws, distribute spam, malware, hate speech, defamatory content, or infringe upon third-party rights.</p>
+              <p>4.2. The Operator reserves the right to suspend or terminate accounts violating these Terms without prior notice.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">5. User Content</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>5.1. Users retain full responsibility for all content transmitted or published through the Application.</p>
+              <p>5.2. The Operator has no obligation to prescreen content but may remove illegal or non-compliant content at any time.</p>
+              <p>5.3. Users grant a limited technical license for the sole purpose of message delivery, synchronization, and storage.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">6. Limitation of Liability</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>6.1. To the maximum extent permitted by law, the Operator disclaims all liability for incidental, indirect, consequential, or punitive damages arising from app use or outage.</p>
+              <p>6.2. The aggregate liability of the Operator is limited to zero ($0 / 0 RUB), as the Application is provided free of charge.</p>
+              <p>6.3. Usage of the Application is strictly at the User&apos;s own risk.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">7. Account Termination</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>7.1. The Operator may terminate accounts at any time for policy breaches or security reasons.</p>
+              <p>7.2. Users may request account deletion in the Application settings or by emailing support@aiwazian.ru.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">8. Intellectual Property</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>8.1. Exclusive proprietary rights to the Application design, logos, and branding belong to Karen Shavarshevich Aiwazian.</p>
+              <p>8.2. Users receive a revocable, non-exclusive, personal license to use the Application.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">9. Dispute Resolution</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>9.1. Claims must be submitted to support@aiwazian.ru. The Operator reviews claims within 30 days.</p>
+            </div>
+          </section>
+
+          <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
+            <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">10. Terms Amendments</h2>
+            <div className="text-zinc-300 leading-relaxed space-y-4">
+              <p>10.1. The Operator may revise these Terms at any time. Continued use signifies agreement to revised terms.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="px-6 md:px-12 py-12 md:py-24 max-w-4xl w-full mx-auto z-10">
       <div className="mx-auto">
@@ -15,7 +110,7 @@ export default function TermsOfService() {
         <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
           <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">1. Общие положения</h2>
           <div className="text-zinc-300 leading-relaxed space-y-4">
-            <p>1.1. Настоящие Условия использования (далее — «Условия») регулируют порядок доступа к мессенджеру «Aiwazian Messenger» и его использования. Оператором Приложения является физическое лицо Айвазян Карен Шаваршевич, сайт: aiwazian.ru, e-mail: support@aiwazian.ru.</p>
+            <p>1.1. Настоящие Условия использования (далее — «Условия») регулируют порядок доступа к мессенджеру «Aiwazian Messenger» и его использования. Оператором Приложения является физическое лицо Айвазян Карен Шаваршевич, e-mail: support@aiwazian.ru.</p>
             <p>1.2. Используя Приложение, Пользователь подтверждает, что ознакомился с настоящими Условиями и Политикой конфиденциальности, понимает их содержание и принимает их в полном объёме. При несогласии с Условиями Пользователь обязан немедленно прекратить использование Приложения.</p>
             <p>1.3. К отношениям сторон применяется право Российской Федерации.</p>
           </div>
@@ -76,8 +171,8 @@ export default function TermsOfService() {
         <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
           <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">7. Блокировка и удаление аккаунта</h2>
           <div className="text-zinc-300 leading-relaxed space-y-4">
-            <p>7.1. Оператор вправе в любое время и без объяснения причин ограничить доступ, заблокировать или удалить аккаунт Пользователя, в том числе при нарушении Условий, требований законодательства или при наличии угрозы безопасности. При этом Оператор не несёт перед Пользователем никакой ответственности и не обязан возвращать какие-либо средства или компенсировать ущерб.</p>
-            <p>7.2. Пользователь вправе удалить аккаунт самостоятельно через интерфейс Приложения или обратившись по адресу: support@aiwazian.ru. После удаления аккаунта восстановление данных не гарантируется.</p>
+            <p>7.1. Оператор вправе в любое время и без объяснения причин ограничить доступ, заблокировать или удалить аккаунт Пользователя, в том числе при нарушении Условий, требований законодательства или при наличии угрозы безопасности.</p>
+            <p>7.2. Пользователь вправе удалить аккаунт самостоятельно через интерфейс Приложения или обратившись по адресу: support@aiwazian.ru.</p>
           </div>
         </section>
 
@@ -85,23 +180,22 @@ export default function TermsOfService() {
           <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">8. Интеллектуальная собственность</h2>
           <div className="text-zinc-300 leading-relaxed space-y-4">
             <p>8.1. Исключительные права на Приложение, его код, дизайн, логотипы и иные элементы принадлежат Айвазян Карен Шаваршевич.</p>
-            <p>8.2. Пользователю предоставляется ограниченная, отзывная, неисключительная, непередаваемая лицензия на использование Приложения в личных некоммерческих целях. Любое иное использование, включая копирование, декомпиляцию и создание производных работ, запрещено.</p>
+            <p>8.2. Пользователю предоставляется ограниченная, отзывная, неисключительная, непередаваемая лицензия на использование Приложения в личных некоммерческих целях.</p>
           </div>
         </section>
 
         <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
           <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">9. Разрешение споров</h2>
           <div className="text-zinc-300 leading-relaxed space-y-4">
-            <p>9.1. Претензии направляются по адресу: support@aiwazian.ru. Оператор рассматривает претензию в течение 30 (тридцати) дней. При недостижении соглашения спор разрешается в суде по месту жительства Оператора в соответствии с законодательством Российской Федерации.</p>
+            <p>9.1. Претензии направляются по адресу: support@aiwazian.ru. Оператор рассматривает претензию в течение 30 (тридцати) дней.</p>
           </div>
         </section>
 
         <section className="mb-10 bg-zinc-900/40 border border-zinc-800 p-6 md:p-8 rounded-2xl">
           <h2 className="text-lg font-bold uppercase tracking-widest text-zinc-500 mb-4">10. Изменение Условий</h2>
           <div className="text-zinc-300 leading-relaxed space-y-4">
-            <p>10.1. Оператор вправе в одностороннем порядке изменять Условия в любое время без предварительного уведомления Пользователя. Новая редакция вступает в силу с момента публикации в Приложении и/или на сайте aiwazian.ru.</p>
-            <p>10.2. Пользователь обязан самостоятельно и регулярно отслеживать актуальную редакцию Условий. Продолжение использования Приложения после публикации изменений означает безоговорочное принятие новой редакции. Незнание актуальной редакции Условий не освобождает Пользователя от их соблюдения.</p>
-            <p>10.3. Если какое-либо положение Условий будет признано недействительным, остальные положения сохраняют полную юридическую силу. Недействительность одного положения не влечёт недействительности Условий в целом.</p>
+            <p>10.1. Оператор вправе в одностороннем порядке изменять Условия в любое время без предварительного уведомления Пользователя. Новая редакция вступает в силу с момента публикации в Приложении и/или на сайте.</p>
+            <p>10.2. Пользователь обязан самостоятельно и регулярно отслеживать актуальную редакцию Условий. Продолжение использования Приложения после публикации изменений означает безоговорочное принятие новой редакции.</p>
           </div>
         </section>
       </div>

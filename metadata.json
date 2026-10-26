@@ -1,6 +1,8 @@
 {
   "name": "Aiwazian Messenger",
-  "description": "Официальный сайт мессенджера Aiwazian Messenger. Безопасность и анонимность.",
+  "description": "Мессенджер с полной анонимностью, без привязки к телефону и почте, с открытым исходным кодом. Скачайте для Android в Google Play.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

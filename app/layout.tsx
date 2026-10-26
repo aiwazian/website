@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
-import { GitHubIcon, TelegramIcon, XIcon } from '@/components/social-icons';
 import { Inter, JetBrains_Mono } from 'next/font/google';
-import Link from 'next/link';
+import { headers, cookies } from 'next/headers';
 import './globals.css';
 import Script from 'next/script';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import { LanguageProvider } from '@/lib/i18n';
+import { Language, translations } from '@/lib/dictionary';
 
 const inter = Inter({
 	subsets: ['latin', 'cyrillic'],
@@ -15,14 +18,92 @@ const jetbrainsMono = JetBrains_Mono({
 	variable: '--font-mono',
 });
 
-export const metadata: Metadata = {
-	title: 'Aiwazian Messenger',
-	description: 'Мессенджер с полной анонимностью, без привязки к телефону и почте, с открытым исходным кодом.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const headersList = await headers();
+	const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'localhost:3000';
+	const proto = headersList.get('x-forwarded-proto') || (host.startsWith('localhost') ? 'http' : 'https');
+	const currentOrigin = `${proto}://${host}`;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+	const cookieStore = await cookies();
+	const savedLang = cookieStore.get('aiwazian_lang')?.value;
+	let isRu = false;
+
+	if (savedLang === 'ru') {
+		isRu = true;
+	} else if (savedLang === 'en') {
+		isRu = false;
+	} else {
+		const acceptLang = headersList.get('accept-language')?.toLowerCase() || '';
+		const primary = acceptLang.split(',')[0]?.trim() || '';
+		isRu = primary.startsWith('ru');
+	}
+
+	const meta = isRu ? translations.ru.meta : translations.en.meta;
+
+	return {
+		metadataBase: new URL(currentOrigin),
+		title: meta.homeTitle,
+		description: meta.homeDescription,
+		applicationName: 'Aiwazian Messenger',
+		authors: [{ name: isRu ? 'Карен Айвазян' : 'Karen Aiwazian', url: 'https://github.com/aiwazian' }],
+		creator: isRu ? 'Карен Айвазян' : 'Karen Aiwazian',
+		publisher: 'Aiwazian',
+		keywords: meta.homeKeywords.split(', '),
+		openGraph: {
+			type: 'website',
+			locale: isRu ? 'ru_RU' : 'en_US',
+			url: currentOrigin,
+			siteName: 'Aiwazian Messenger',
+			title: meta.ogTitle,
+			description: meta.ogDescription,
+			images: [
+				{
+					url: '/og-image.png',
+					width: 512,
+					height: 512,
+					alt: isRu ? 'Логотип Aiwazian Messenger' : 'Aiwazian Messenger Logo',
+				},
+			],
+		},
+		twitter: {
+			card: 'summary',
+			title: meta.homeTitle,
+			description: meta.homeDescription,
+			images: ['/og-image.png'],
+			creator: '@karenaiwazian',
+		},
+		icons: {
+			icon: '/icon.svg',
+			shortcut: '/icon.svg',
+			apple: '/logo.png',
+		},
+	};
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+	const headersList = await headers();
+	const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'localhost:3000';
+	const proto = headersList.get('x-forwarded-proto') || (host.startsWith('localhost') ? 'http' : 'https');
+	const currentOrigin = `${proto}://${host}`;
+
+	const cookieStore = await cookies();
+	const savedLang = cookieStore.get('aiwazian_lang')?.value;
+	let initialLang: Language = 'en';
+
+	if (savedLang === 'ru' || savedLang === 'en') {
+		initialLang = savedLang;
+	} else {
+		const acceptLang = headersList.get('accept-language')?.toLowerCase() || '';
+		const primary = acceptLang.split(',')[0]?.trim() || '';
+		if (primary.startsWith('ru')) {
+			initialLang = 'ru';
+		} else {
+			initialLang = 'en';
+		}
+	}
+
 	return (
-		<html lang="ru" className={`${inter.variable} ${jetbrainsMono.variable} dark`}>
+		<html lang={initialLang} className={`${inter.variable} ${jetbrainsMono.variable} dark`}>
 			<body className="bg-[#080808] text-[#F0F0F0] font-sans flex flex-col min-h-screen antialiased selection:bg-zinc-700/50 selection:text-white" suppressHydrationWarning>
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-Q9WNS0MCJZ"
@@ -37,65 +118,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         gtag('config', 'G-Q9WNS0MCJZ');
                     `}
 				</Script>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							'@context': 'https://schema.org',
+							'@type': 'SoftwareApplication',
+							name: 'Aiwazian Messenger',
+							operatingSystem: 'Android 11+',
+							applicationCategory: 'CommunicationApplication',
+							description:
+								initialLang === 'ru'
+									? translations.ru.meta.homeDescription
+									: translations.en.meta.homeDescription,
+							image: `${currentOrigin}/og-image.png`,
+							offers: {
+								'@type': 'Offer',
+								price: '0',
+								priceCurrency: 'RUB',
+							},
+							author: {
+								'@type': 'Person',
+								name: initialLang === 'ru' ? 'Айвазян Карен Шаваршевич' : 'Karen Aiwazian',
+								url: 'https://github.com/aiwazian',
+							},
+							installUrl: 'https://play.google.com/store/apps/details?id=com.aiwazian.messenger',
+						}),
+					}}
+				/>
 
-				<header className="sticky top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 z-50 bg-[#080808]/70 backdrop-blur-md border-b border-white/5">
-					<Link href="/" className="flex items-center gap-3 group">
-						<span className="text-2xl font-bold tracking-tight uppercase">Aiwazian</span>
-					</Link>
-					<nav className="flex items-center gap-4 md:gap-8 text-sm font-medium uppercase tracking-widest text-zinc-400">
-						<a href="https://play.google.com/store/apps/details?id=com.aiwazian.messenger" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Скачать</a>
-					</nav>
-				</header>
+				<LanguageProvider initialLang={initialLang}>
+					<Navbar />
 
-				<main className="flex-1 flex flex-col">
-					{children}
-				</main>
+					<main className="flex-1 flex flex-col">
+						{children}
+					</main>
 
-				<footer className="px-6 md:px-12 py-8 z-10 mt-auto border-t border-white/5 grid grid-cols-1 md:grid-cols-3 items-end gap-6">
-					<div className="flex gap-6 text-xs text-zinc-500">
-						<Link href="/privacy" className="hover:text-white transition-colors underline underline-offset-4">
-							Политика конфиденциальности
-						</Link>
-						<Link href="/tos" className="hover:text-white transition-colors underline underline-offset-4">
-							Условия использования
-						</Link>
-					</div>
-
-					<div className="flex gap-5 justify-self-start md:justify-self-center">
-						<a
-							href="https://x.com/karenaiwazian"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="X"
-							className="text-zinc-500 hover:text-white transition-colors"
-						>
-							<XIcon className="w-5 h-5" />
-						</a>
-						<a
-							href="https://aiwazian.t.me"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Telegram"
-							className="text-zinc-500 hover:text-white transition-colors"
-						>
-							<TelegramIcon className="w-5 h-5" />
-						</a>
-						<a
-							href="https://github.com/aiwazian"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="GitHub"
-							className="text-zinc-500 hover:text-white transition-colors"
-						>
-							<GitHubIcon className="w-5 h-5" />
-						</a>
-					</div>
-
-					<p className="text-[10px] text-zinc-700 uppercase tracking-widest justify-self-start md:justify-self-end">
-						&copy; {new Date().getFullYear()} AIWAZIAN
-					</p>
-				</footer>
+					<Footer />
+				</LanguageProvider>
 			</body>
-		</html >
-	)
+		</html>
+	);
 }
